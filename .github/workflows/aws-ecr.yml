@@ -7,7 +7,7 @@ jobs:
   push_to_aws:
     name: Push Docker image to AWS ECR
     runs-on: ubuntu-latest
-  	steps:
+    steps:
       - name: Checkout
         uses: actions/checkout@v3
 
