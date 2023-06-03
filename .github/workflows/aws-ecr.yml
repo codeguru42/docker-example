@@ -4,7 +4,7 @@ on:
   push:
 
 jobs:
-  push:
+  push_to_aws:
     name: Push Docker image to AWS ECR
     runs-on: ubuntu-latest
   	steps:
