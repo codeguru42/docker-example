@@ -1,3 +1,7 @@
+Parameters:
+  GithubOidc:
+    Type: String
+
 Resources:
   GithubRole:
     Type: AWS::IAM::Role
