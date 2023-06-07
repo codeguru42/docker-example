@@ -15,7 +15,7 @@ Resources:
               Federated: !Ref GithubOidc
             Condition:
               StringLike:
-                token.actions.githubusercontent.com:sub: codeguru42/docker-example:*
+                token.actions.githubusercontent.com:sub: repo:codeguru42/docker-example:*
       Path: /docker_example/
       Policies:
         - PolicyName: EcrPolicy
