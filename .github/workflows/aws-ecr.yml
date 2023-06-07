@@ -25,6 +25,7 @@ jobs:
         id: build-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: codeguru42/docker-example
           IMAGE_TAG: ${{ github.sha }}
         run: |
           # Build a docker container and
