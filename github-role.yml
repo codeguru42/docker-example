@@ -1,0 +1,64 @@
+Resources:
+  GithubRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: GithubRole
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Action: sts:AssumeRoleWithWebIdentity
+            Principal:
+              Federated: !Ref GithubOidc
+            Condition:
+              StringLike:
+                token.actions.githubusercontent.com:sub: codeguru42/docker-example:*
+      Path: /docker_example/
+      Policies:
+        - PolicyName: IamPolicy
+          PolicyDocument: {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": Allow,
+                "Action": [
+                  iam:GetRole,
+                  iam:GetUser,
+                  iam:ListAccessKeys,
+                ],
+                "Resource": "arn:aws:iam::200049542062:user/docker_example/*"
+              },
+            ]
+          }
+        - PolicyName: EcrPolicy
+          PolicyDocument: {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": Allow,
+                "Action": [
+                  ecr:GetAuthorizationToken,
+                  ecr:BatchGetImage,
+                  ecr:BatchCheckLayerAvailability,
+                  ecr:CompleteLayerUpload,
+                  ecr:GetDownloadUrlForLayer,
+                  ecr:InitiateLayerUpload,
+                  ecr:PutImage,
+                  ecr:UploadLayerPart,
+                ],
+                "Resource": "*"
+              },
+            ]
+          }
+
+  GithubOidc:
+    Type: AWS::IAM::OIDCProvider
+    Properties:
+      Url: https://token.actions.githubusercontent.com
+      ClientIdList:
+        - sts.amazonaws.com
+      ThumbprintList:
+        - 6938fd4d98bab03faadb97b34396831e3780aea1
+
+Outputs:
+  Role:
+    Value: !GetAtt GithubRole.Arn
