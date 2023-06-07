@@ -6,6 +6,7 @@ Resources:
   GithubRole:
     Type: AWS::IAM::Role
     Properties:
+      RoleName: DockerExampleGithubRole
       AssumeRolePolicyDocument:
         Statement:
           - Effect: Allow
