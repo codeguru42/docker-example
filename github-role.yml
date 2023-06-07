@@ -14,21 +14,6 @@ Resources:
                 token.actions.githubusercontent.com:sub: codeguru42/docker-example:*
       Path: /docker_example/
       Policies:
-        - PolicyName: IamPolicy
-          PolicyDocument: {
-            "Version": "2012-10-17",
-            "Statement": [
-              {
-                "Effect": Allow,
-                "Action": [
-                  iam:GetRole,
-                  iam:GetUser,
-                  iam:ListAccessKeys,
-                ],
-                "Resource": "arn:aws:iam::200049542062:user/docker_example/*"
-              },
-            ]
-          }
         - PolicyName: EcrPolicy
           PolicyDocument: {
             "Version": "2012-10-17",
